@@ -1,0 +1,391 @@
+stop_name,latitude,longitude
+Château de Vincennes,48.844456,2.440440
+Bérault,48.845471,2.429205
+Saint-Mandé,48.846423,2.418760
+Porte de Vincennes,48.847226,2.409099
+Nation,48.848122,2.395556
+Reuilly-Diderot,48.847154,2.386134
+Gare de Lyon,48.844406,2.373693
+Bastille,48.852962,2.368975
+Saint-Paul (Le Marais),48.855236,2.360956
+Hôtel de Ville,48.857465,2.351293
+Châtelet,48.858634,2.347047
+Louvre-Rivoli,48.860806,2.341109
+Palais-Royal (Musée du Louvre),48.862589,2.336687
+Tuileries,48.864344,2.330130
+Concorde,48.866424,2.322734
+Champs-Elysées-Clémenceau,48.867754,2.313720
+Franklin-Roosevelt,48.869069,2.309056
+George V,48.872024,2.300560
+Charles de Gaulle-Etoile,48.874728,2.295510
+Argentine,48.875337,2.290128
+Porte Maillot,48.877833,2.283621
+Les Sablons (Jardin d'acclimatation),48.881016,2.272239
+Pont de Neuilly,48.884708,2.260515
+Esplanade de la Défense,48.888138,2.249793
+La Défense (Grande Arche),48.892171,2.237067
+Avron,48.851905,2.397997
+Alexandre-Dumas,48.856228,2.394676
+Philippe Auguste,48.858062,2.390861
+Père-Lachaise,48.862653,2.386859
+Ménilmontant,48.866447,2.383599
+Couronnes,48.869091,2.380543
+Belleville,48.872066,2.376662
+Colonel Fabien,48.877610,2.370811
+Jaurès,48.882428,2.370783
+Stalingrad,48.884469,2.367591
+La Chapelle,48.884400,2.360400
+Barbès-Rochechouart,48.883611,2.350144
+Anvers,48.882973,2.344667
+Pigalle,48.882237,2.337699
+Blanche,48.883556,2.333380
+Place de Clichy,48.883902,2.327887
+Rome,48.882333,2.321802
+Villiers,48.881094,2.314721
+Monceau,48.880325,2.308774
+Courcelles,48.879330,2.304070
+Ternes,48.877973,2.298310
+Victor Hugo,48.869799,2.285335
+Porte Dauphine (Maréchal de Lattre de Tassigny),48.870823,2.275855
+Gallieni (Parc de Bagnolet),48.865335,2.416697
+Porte de Bagnolet,48.864017,2.408432
+Gambetta,48.865071,2.397830
+Rue Saint-Maur,48.864286,2.379742
+Parmentier,48.865254,2.374582
+République,48.867647,2.363750
+Temple,48.866514,2.360804
+Arts-et-Métiers,48.865455,2.356733
+Réaumur-Sébastopol,48.866615,2.352094
+Sentier,48.867513,2.346552
+Bourse,48.868654,2.341376
+Quatre Septembre,48.869638,2.336233
+Opéra,48.870577,2.331758
+Havre-Caumartin,48.873613,2.327619
+Saint-Lazare,48.875940,2.325233
+Europe,48.878770,2.322265
+Malesherbes,48.588242,2.355093
+Wagram,48.883809,2.304674
+Pereire,48.885469,2.298502
+Porte de Champerret,48.885994,2.293065
+Louise Michel,48.888706,2.288084
+Anatole-France,48.892083,2.285010
+Pont de Levallois-Bécon,48.897154,2.280414
+Porte des Lilas,48.876972,2.406736
+Saint-Fargeau,48.718587,2.473562
+Pelleport,48.868440,2.401562
+Porte de Clignancourt,48.897722,2.344963
+Simplon,48.894344,2.347431
+Marcadet-Poissonniers,48.891452,2.349721
+Château Rouge,48.886711,2.349559
+Gare du Nord,48.880883,2.357014
+Gare de l'Est (Verdun),48.876441,2.358361
+Château d'Eau,48.872621,2.356154
+Strasbourg-Saint-Denis,48.869478,2.354035
+Etienne Marcel,48.863972,2.349618
+Les Halles,48.862515,2.345786
+Cité,48.854936,2.347321
+Saint-Michel,48.852940,2.344198
+Odéon,48.852118,2.340170
+Saint-Germain des Prés,48.853719,2.333776
+Saint-Sulpice,48.851071,2.330701
+Saint-Placide,48.846878,2.326793
+Montparnasse-Bienvenue,48.842987,2.322753
+Vavin,48.842218,2.329009
+Raspail,48.838964,2.330754
+Denfert-Rochereau,48.833606,2.332599
+Mouton-Duvernet,48.831113,2.329705
+Alésia,48.828188,2.327165
+Porte d'Orléans (Général Leclerc),48.823282,2.325543
+Mairie de Montrouge,48.818676,2.319740
+Barbara,48.809704,2.317449
+Bagneux Lucie Aubrac,48.803630,2.318054
+Bobigny-Pablo-Picasso,48.906455,2.449598
+Bobigny-Pantin (Raymond Queneau),48.895455,2.425327
+Eglise de Pantin,48.893150,2.412763
+Hoche,48.891229,2.402352
+Porte de Pantin,48.888713,2.393733
+Ourcq,48.886857,2.385913
+Laumière,48.884971,2.378717
+Jacques-Bonsergent,48.870396,2.361400
+Oberkampf,48.864992,2.367956
+Richard-Lenoir,48.859874,2.371914
+Bréguet-Sabin,48.856141,2.370209
+Quai de la Rapée,48.846485,2.365910
+Gare d'Austerlitz,48.842424,2.365393
+Saint-Marcel,48.838427,2.360967
+Campo-Formio,48.835153,2.358566
+Place d'Italie,48.831111,2.355782
+Picpus,48.845062,2.401289
+Bel-Air,48.841338,2.400919
+Daumesnil (Félix Eboué),48.839498,2.395943
+Dugommier,48.839041,2.389620
+Bercy,48.840195,2.379733
+Quai de la Gare,48.837045,2.372826
+Chevaleret,48.834948,2.368126
+Nationale,48.833217,2.362856
+Corvisart,48.829791,2.350415
+Glacière,48.831130,2.343512
+Saint-Jacques,48.832901,2.337135
+Edgar-Quinet,48.840663,2.326385
+Pasteur,48.842774,2.312630
+Sèvres-Lecourbe,48.845627,2.309531
+Cambronne,48.847507,2.302968
+La Motte-Picquet-Grenelle,48.849297,2.298727
+Dupleix,48.850435,2.293612
+Bir-Hakeim (Grenelle),48.853943,2.289335
+Passy,48.857449,2.285812
+Trocadéro,48.863338,2.286912
+Boissière,48.866983,2.290059
+Kléber,48.871262,2.293241
+La Courneuve-8-Mai-1945,48.920786,2.410599
+Fort d'Aubervilliers,48.914950,2.404409
+Aubervilliers Pantin (4 Chemins),48.903784,2.392221
+Porte de la Villette,48.897409,2.386045
+Corentin-Cariou,48.894656,2.382160
+Crimée,48.890906,2.377090
+Riquet,48.887968,2.373457
+Louis Blanc,48.881069,2.364686
+Château Landon,48.878444,2.361965
+Poissonnière,48.877100,2.348776
+Cadet,48.876009,2.344572
+Le Peletier,48.874972,2.340576
+Chaussée d'Antin (La Fayette),48.873029,2.334201
+Pyramides,48.865822,2.334314
+Pont Neuf,48.858554,2.342233
+Pont Marie (Cité des Arts),48.853575,2.357163
+Sully-Morland,48.851621,2.361525
+Jussieu,48.846051,2.354984
+Place Monge (Jardin des Plantes),48.842867,2.352225
+Censier-Daubenton,48.840234,2.351606
+Les Gobelins,48.835930,2.352542
+Tolbiac,48.826426,2.357246
+Maison Blanche,48.821802,2.358803
+Le Kremlin-Bicêtre,48.810130,2.362263
+Villejuif-Léo Lagrange,48.804688,2.363953
+Villejuif-Paul Vaillant Couturier (Hôpital Paul Brousse),48.796483,2.368270
+Villejuif-Louis Aragon,48.787422,2.367396
+Porte d'Italie,48.819137,2.359917
+Porte de Choisy,48.819697,2.364579
+Porte d'Ivry,48.821593,2.369672
+Pierre et Marie Curie,48.815931,2.377267
+Mairie d'Ivry,48.810521,2.384290
+Pré-Saint-Gervais,48.880272,2.398468
+Danube,48.881816,2.394012
+Botzaris,48.879493,2.388567
+Buttes-Chaumont,48.878514,2.381615
+Bolivar,48.880667,2.374496
+Place des Fêtes,48.876878,2.393020
+Balard,48.836209,2.278225
+Lourmel,48.838735,2.282143
+Boucicaut,48.841094,2.287946
+Félix Faure,48.842747,2.291912
+Commerce,48.844795,2.293952
+Ecole Militaire,48.854891,2.306403
+La Tour-Maubourg,48.857725,2.310566
+Invalides,48.861098,2.313773
+Madeleine,48.870178,2.325729
+Richelieu-Drouot,48.871942,2.338660
+Grands Boulevards,48.871257,2.344561
+Bonne Nouvelle,48.870590,2.348491
+Filles du Calvaire,48.863258,2.366661
+Saint-Sébastien-Froissart,48.861169,2.367211
+Chemin Vert,48.857103,2.368184
+Ledru-Rollin,48.851524,2.375101
+Faidherbe-Chaligny,48.850178,2.384092
+Montgallet,48.844066,2.390482
+Michel Bizot,48.837117,2.402333
+Porte Dorée,48.835154,2.406020
+Porte de Charenton,48.832365,2.399330
+Liberté,48.826620,2.405852
+Charenton-Ecoles,48.821898,2.413133
+Ecole Vétérinaire de Maisons-Alfort,48.814803,2.422376
+Maisons-Alfort-Stade,48.809144,2.434510
+Maisons-Alfort-Les Juilliottes,48.803355,2.445574
+Créteil-L'Echat (Hôpital Henri Mondor),48.796682,2.449413
+Créteil-Université,48.789920,2.450512
+Créteil-Préfecture (Hôtel de Ville),48.780003,2.459363
+Pointe du Lac,48.768763,2.464423
+Pont de Sèvres,48.829746,2.231028
+Billancourt,48.831738,2.237437
+Marcel Sembat,48.833629,2.243579
+Porte de Saint-Cloud,48.837961,2.257122
+Exelmans,48.842413,2.259608
+Michel-Ange-Molitor,48.845153,2.261684
+Michel-Ange-Auteuil,48.847915,2.264150
+Jasmin,48.852504,2.268177
+Ranelagh,48.855485,2.270109
+La Muette,48.858046,2.274155
+Rue de la Pompe (Avenue Georges Mandel),48.863940,2.278442
+Iéna,48.864794,2.294162
+Alma-Marceau,48.864767,2.300991
+Saint-Philippe du Roule,48.872046,2.310019
+Miromesnil,48.873752,2.314600
+Saint-Augustin,48.874476,2.322002
+Saint-Ambroise,48.861476,2.373944
+Voltaire (Léon Blum),48.857878,2.380021
+Charonne,48.855094,2.384700
+Rue des Boulets,48.852168,2.389626
+Buzenval,48.851975,2.401927
+Maraîchers,48.852725,2.406089
+Porte de Montreuil,48.853380,2.411318
+Robespierre,48.855726,2.422983
+Croix-de-Chavaux (Jacques Duclos),48.857784,2.434538
+Mairie de Montreuil,48.862299,2.441522
+Boulogne Pont de Saint-Cloud,48.840745,2.228537
+Boulogne-Jean-Jaurès,48.842005,2.238887
+Chardon-Lagache,48.845205,2.266442
+Mirabeau,48.847131,2.272764
+Javel-André-Citroen,48.846157,2.278400
+Charles Michels,48.846535,2.285999
+Avenue Emile-Zola,48.846997,2.295019
+Ségur,48.847066,2.307402
+Duroc,48.847021,2.316715
+Vaneau,48.848816,2.321258
+Sèvres-Babylone,48.851397,2.326462
+Mabillon,48.853017,2.335502
+Cluny-La Sorbonne,48.851050,2.344273
+Maubert-Mutualité,48.850090,2.348209
+Cardinal-Lemoine,48.846657,2.351623
+Eglise d'Auteuil,48.847150,2.269136
+Porte d'Auteuil,48.847972,2.257745
+Mairie des Lilas,48.879761,2.416480
+Télégraphe,48.875474,2.398868
+Jourdain,48.875112,2.389415
+Pyrénées,48.873882,2.385316
+Goncourt (Hôpital Saint-Louis),48.869958,2.371095
+Rambuteau,48.861205,2.353496
+Mairie d'Issy,48.824309,2.273666
+Corentin-Celton,48.827085,2.279412
+Porte de Versailles,48.832333,2.287766
+Convention,48.837099,2.296231
+Vaugirard (Adolphe Chérioux),48.839517,2.301108
+Volontaires,48.841506,2.307949
+Falguière,48.844470,2.317853
+Notre-Dame des Champs,48.844943,2.328778
+Rennes,48.848458,2.327782
+Rue du Bac,48.855196,2.325816
+Solférino,48.858499,2.323168
+Assemblée Nationale,48.860787,2.320998
+Trinité-d'Estienne d'Orves,48.876330,2.333109
+Notre-Dame de Lorette,48.876047,2.337496
+Saint-Georges,48.878173,2.337858
+Abbesses,48.884594,2.337950
+Lamarck-Caulaincourt,48.889674,2.338761
+Jules Joffrin,48.892419,2.344765
+Marx-Dormoy,48.890485,2.359996
+Porte de la Chapelle,48.897819,2.358942
+Front Populaire,48.906567,2.365920
+Aimé Césaire,48.908082,2.377741
+Mairie d'Aubervilliers,48.913711,2.380736
+Châtillon Montrouge,48.810674,2.301018
+Malakoff-Rue Etienne Dolet,48.815308,2.297078
+Malakoff-Plateau de Vanves,48.822584,2.298464
+Porte de Vanves,48.827605,2.306085
+Plaisance,48.831826,2.314122
+Pernety,48.834226,2.318616
+Gaîté,48.838632,2.322492
+Saint-François-Xavier,48.851442,2.314408
+Varenne,48.856871,2.315057
+Liège,48.879635,2.327022
+La Fourche,48.887184,2.325780
+Brochant,48.890587,2.320175
+Porte de Clichy,48.894506,2.314099
+Mairie de Clichy,48.903234,2.306011
+Gabriel-Péri,48.916382,2.294685
+Les Agnettes,48.923104,2.286280
+Asnières-Gennevilliers Les Courtilles,48.930486,2.283949
+Guy-Môquet,48.892207,2.327220
+Porte de Saint-Ouen,48.897523,2.329387
+Garibaldi,48.906094,2.331831
+Mairie de Saint-Ouen,48.912583,2.334294
+Carrefour-Pleyel,48.919008,2.342608
+Saint-Denis - Porte de Paris,48.929876,2.356664
+Basilique de Saint-Denis,48.937417,2.360079
+Saint-Denis-Université,48.945867,2.364636
+Saint-Ouen,48.904531,2.322185
+Pont Cardinet,48.888890,2.314455
+Cour Saint-Emilion,48.833339,2.386632
+Bibliothèque-François Mitterrand,48.829435,2.376722
+Olympiades,48.827271,2.368033
+Saint-Germain-en-Laye,48.899895,2.095025
+Le Vésinet-Le Pecq,48.897973,2.122117
+Le Vésinet-Centre,48.890086,2.134601
+Chatou-Croissy,48.885211,2.155903
+Rueil-Malmaison,48.887574,2.172579
+Nanterre-Ville,48.895126,2.195364
+Nanterre-Université,48.901161,2.213429
+Nanterre-Préfecture,48.895745,2.223213
+Auber,48.872157,2.329927
+Châtelet-Les Halles,48.861822,2.347013
+Vincennes,48.847340,2.432435
+Fontenay-sous-Bois,48.843794,2.463501
+Nogent-sur-Marne,48.834289,2.471681
+Joinville-le-Pont,48.821039,2.463857
+Saint-Maur Créteil,48.806200,2.472720
+Le Parc de Saint-Maur,48.805378,2.486350
+Champigny,48.806985,2.510307
+La Varenne-Chennevières,48.795384,2.513423
+Sucy Bonneuil,48.771708,2.507483
+Boissy-Saint-Léger,48.752186,2.504560
+Cergy-Le-Haut,49.047876,2.011000
+Cergy-Saint-Christophe,49.049647,2.034294
+Cergy-Préfecture,49.036464,2.079535
+Neuville-Université,49.014134,2.078307
+Conflans-Fin d'Oise,48.990874,2.074431
+Achères-Ville,48.970665,2.077732
+Maisons-Laffitte,48.945503,2.145017
+Sartrouville,48.937736,2.157086
+Houilles Carrières-sur-Seine,48.920379,2.185353
+Val de Fontenay,48.854183,2.488932
+Noisy-le-Grand (Mont d'Est),48.840844,2.549900
+Noisy-Champs,48.842885,2.580086
+Noisiel,48.843509,2.616679
+Lognes,48.839219,2.633211
+Torcy,48.839646,2.655130
+Bussy-Saint-Georges,48.836536,2.708982
+Val d'europe,48.854825,2.772428
+Marne-la-Vallée Chessy,48.869950,2.782227
+Mitry-Claye,48.975859,2.642406
+Villeparisis,48.953148,2.603135
+Vert-Galant,48.944181,2.566448
+Sevran Livry,48.936280,2.534715
+Aulnay-sous-Bois,48.932117,2.496048
+Blanc-Mesnil,48.932305,2.475674
+Drancy,48.932706,2.454766
+Le Bourget,48.930514,2.424588
+La Courneuve-Aubervilliers,48.924354,2.386388
+La Plaine-Stade de France,48.918008,2.362471
+Saint-Michel Notre-Dame,48.852940,2.344198
+Luxembourg,48.845434,2.339763
+Port-Royal,48.840034,2.337096
+Cité Universitaire,48.820720,2.338780
+Gentilly,48.815230,2.340891
+Laplace,48.808297,2.334354
+Arcueil-Cachan,48.798893,2.328137
+Bagneux,48.793336,2.322202
+Bourg-la-Reine,48.780314,2.312308
+Sceaux,48.781357,2.297648
+Fontenay-aux-Roses,48.787567,2.292988
+Robinson,48.780237,2.281431
+Aéroport Charles de Gaulle 2 TGV,49.004687,2.570589
+Aéroport Charles de Gaulle 1,49.009756,2.561233
+Parc des Expositions,48.973425,2.514360
+Villepinte,48.962710,2.512645
+Sevran-Beaudottes,48.946894,2.524779
+Parc de Sceaux,48.769563,2.309905
+La Croix-de-Berny,48.762545,2.304577
+Antony,48.754947,2.300987
+Fontaine-Michalon,48.743017,2.295921
+Les Baconnets,48.739681,2.287667
+Massy-Verrières,48.734888,2.274002
+Massy-Palaiseau,48.725455,2.258527
+Palaiseau,48.716946,2.245673
+Palaiseau-Villebon,48.708141,2.237314
+Lozère,48.705969,2.212262
+Le Guichet,48.705404,2.192735
+Orsay-Ville,48.697506,2.181054
+Bures-sur-Yvette,48.696253,2.164378
+La Hacquinière,48.695264,2.151642
+Gif-sur-Yvette,48.698197,2.136567
+Courcelle-sur-Yvette,48.701218,2.097976
+Saint-Rémy Iès-Chevreuse,48.702751,2.071243
