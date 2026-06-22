@@ -1,0 +1,10 @@
+**/node_modules
+**/target
+**/dist
+frontend/.vite
+*.png
+docs/
+tools/
+.git
+.idea
+*.iml
