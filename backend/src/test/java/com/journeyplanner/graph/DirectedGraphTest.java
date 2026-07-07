@@ -2,7 +2,6 @@ package com.journeyplanner.graph;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -23,29 +22,21 @@ class DirectedGraphTest {
       return g;
    }
 
-   private List<String> pathTo(VertexInterface<String> end) {
-      List<String> path = new ArrayList<>();
-      for (VertexInterface<String> v = end; v != null; v = v.getPredecessor()) {
-         path.add(0, v.getLabel());
-      }
-      return path;
-   }
-
    @Test
    void shortestPathByTimePrefersCheaperMultiHop() {
       DirectedGraph<String> g = sampleGraph();
-      VertexInterface<String> end = g.computeShortestPathByTime("A", "C");
-      assertEquals(2.0, end.getCost(), 1e-9);
-      assertEquals(List.of("A", "B", "C"), pathTo(end));
+      DirectedGraph.Path<String> path = g.computeShortestPathByTime("A", "C");
+      assertEquals(2.0, path.totalSeconds(), 1e-9);
+      assertEquals(List.of("A", "B", "C"), path.stops());
    }
 
    @Test
    void shortestPathByStopsPrefersFewerHops() {
       DirectedGraph<String> g = sampleGraph();
-      VertexInterface<String> end = g.computeShortestPathByStops("A", "C");
+      DirectedGraph.Path<String> path = g.computeShortestPathByStops("A", "C");
       // The direct A→C edge is one hop even though it is slower.
-      assertEquals(List.of("A", "C"), pathTo(end));
-      assertEquals(5.0, end.getCost(), 1e-9);
+      assertEquals(List.of("A", "C"), path.stops());
+      assertEquals(5.0, path.totalSeconds(), 1e-9);
    }
 
    @Test

@@ -1,7 +1,6 @@
 package com.journeyplanner.service;
 
 import com.journeyplanner.graph.DirectedGraph;
-import com.journeyplanner.graph.VertexInterface;
 import com.journeyplanner.model.Preference;
 import com.journeyplanner.model.RouteResult;
 import com.journeyplanner.model.RouteResult.RouteSegment;
@@ -10,7 +9,6 @@ import com.journeyplanner.model.Station;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -41,36 +39,24 @@ public class RouteService {
       }
 
       DirectedGraph<Station> graph = loader.getGraph();
-      VertexInterface<Station> endVertex = (preference == Preference.STOPS)
+      DirectedGraph.Path<Station> path = (preference == Preference.STOPS)
             ? graph.computeShortestPathByStops(origin, destination)
             : graph.computeShortestPathByTime(origin, destination);
 
-      if (endVertex == null) {
+      if (path == null) {
          throw new NoRouteException(origin.getStopName(), destination.getStopName());
       }
 
-      List<Station> path = reconstructPath(endVertex);
-      List<RouteSegment> segments = groupIntoSegments(path);
+      List<Station> stops = path.stops();
+      List<RouteSegment> segments = groupIntoSegments(stops);
 
       return new RouteResult(
             origin.getStopName(),
             destination.getStopName(),
             preference.name(),
-            endVertex.getCost(),
-            Math.max(0, path.size() - 1),
+            path.totalSeconds(),
+            Math.max(0, stops.size() - 1),
             segments);
-   }
-
-   /** Walks predecessor links from the destination back to the origin, then reverses. */
-   private List<Station> reconstructPath(VertexInterface<Station> endVertex) {
-      List<Station> path = new ArrayList<>();
-      VertexInterface<Station> current = endVertex;
-      while (current != null) {
-         path.add(current.getLabel());
-         current = current.getPredecessor();
-      }
-      Collections.reverse(path);
-      return path;
    }
 
    /**

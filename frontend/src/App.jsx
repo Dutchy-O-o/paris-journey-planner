@@ -15,6 +15,25 @@ export default function App() {
   // Which field a map click should fill next.
   const [activeField, setActiveField] = useState('origin')
 
+  // Single source of truth for planning: route and error are mutually exclusive,
+  // so a success always clears any previous error and vice-versa.
+  async function runPlan(from, to, pref) {
+    setError('')
+    setLoading(true)
+    try {
+      const result = await planRoute(from, to, pref)
+      setRoute(result)
+      setError('')
+      const qs = new URLSearchParams({ from, to, pref })
+      window.history.replaceState(null, '', `?${qs}`)
+    } catch (err) {
+      setRoute(null)
+      setError(err.message)
+    } finally {
+      setLoading(false)
+    }
+  }
+
   useEffect(() => {
     fetchStations()
       .then((list) => {
@@ -29,30 +48,19 @@ export default function App() {
         if (to) setDestination(to)
         const names = list.map((s) => s.name)
         if (from && to && names.includes(from) && names.includes(to)) {
-          planRoute(from, to, pref || 'TIME').then(setRoute).catch((e) => setError(e.message))
+          runPlan(from, to, pref === 'STOPS' ? 'STOPS' : 'TIME')
         }
       })
       .catch(() => setError('Could not load the station list. Is the backend running?'))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const names = stations.map((s) => s.name)
   const canSubmit = names.includes(origin) && names.includes(destination) && origin !== destination
 
-  async function onSubmit(e) {
+  function onSubmit(e) {
     e.preventDefault()
-    setError('')
-    setLoading(true)
-    try {
-      const result = await planRoute(origin, destination, preference)
-      setRoute(result)
-      const qs = new URLSearchParams({ from: origin, to: destination, pref: preference })
-      window.history.replaceState(null, '', `?${qs}`)
-    } catch (err) {
-      setRoute(null)
-      setError(err.message)
-    } finally {
-      setLoading(false)
-    }
+    runPlan(origin, destination, preference)
   }
 
   function swap() {

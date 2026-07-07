@@ -5,6 +5,12 @@ import com.journeyplanner.model.RouteResult;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -60,6 +66,35 @@ class RouteServiceTest {
    void unknownStationIsReported() {
       assertThrows(StationNotFoundException.class,
             () -> service.findRoute("Nowhere", "Bastille", Preference.TIME));
+   }
+
+   /**
+    * The graph is a shared singleton; the search must not mutate it. Hammering the
+    * same query from many threads must always return the identical, correct result
+    * (this reproduces the earlier race where concurrent calls corrupted each other).
+    */
+   @Test
+   void concurrentRoutingIsConsistent() throws Exception {
+      RouteResult expected = service.findRoute("Nation", "Charles de Gaulle-Etoile", Preference.TIME);
+      int threads = 16;
+      int iterations = 40;
+
+      ExecutorService pool = Executors.newFixedThreadPool(threads);
+      try {
+         List<Future<RouteResult>> futures = new ArrayList<>();
+         for (int i = 0; i < threads * iterations; i++) {
+            futures.add(pool.submit(
+                  () -> service.findRoute("Nation", "Charles de Gaulle-Etoile", Preference.TIME)));
+         }
+         for (Future<RouteResult> f : futures) {
+            RouteResult r = f.get();
+            assertEquals(expected.totalStops(), r.totalStops());
+            assertEquals(expected.totalSeconds(), r.totalSeconds(), 1e-9);
+            assertEquals(expected.segments().size(), r.segments().size());
+         }
+      } finally {
+         pool.shutdownNow();
+      }
    }
 
    @Test

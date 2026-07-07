@@ -4,18 +4,25 @@ import com.journeyplanner.graph.adt.Dictionary;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.PriorityQueue;
+import java.util.Set;
 
 /**
  * A weighted directed graph backed by the custom {@link Dictionary} ADT.
  *
  * <p>The path algorithms ({@link #computeShortestPathByTime} and
- * {@link #computeShortestPathByStops}) record cost and predecessor links on the
- * vertices themselves and return the destination vertex. Callers reconstruct the
- * route by walking {@link VertexInterface#getPredecessor()} from the destination
- * back to the origin. The graph deliberately knows nothing about how a route is
- * presented, so the same core can serve a console, a REST API, or tests.
+ * {@link #computeShortestPathByStops}) keep all search state (distance,
+ * predecessor, settled set) in local maps rather than mutating the vertices.
+ * The graph is therefore never modified while answering a query, so a single
+ * shared instance can serve concurrent requests safely. Each method returns an
+ * immutable {@link Path} (ordered stop labels + total travel time) or {@code null}
+ * when no route exists.
  */
 public class DirectedGraph<T> {
    private final Dictionary<T, VertexInterface<T>> vertices;
@@ -24,6 +31,10 @@ public class DirectedGraph<T> {
    public DirectedGraph() {
       vertices = new Dictionary<>();
       edgeCount = 0;
+   }
+
+   /** An ordered path through the graph and its total travel time in seconds. */
+   public record Path<T>(List<T> stops, double totalSeconds) {
    }
 
    public boolean addVertex(T vertexLabel) {
@@ -59,52 +70,42 @@ public class DirectedGraph<T> {
       return found;
    }
 
-   protected void resetVertices() {
-      Iterator<VertexInterface<T>> vertexIterator = vertices.getValueIterator();
-      while (vertexIterator.hasNext()) {
-         VertexInterface<T> nextVertex = vertexIterator.next();
-         nextVertex.unvisit();
-         nextVertex.setCost(0);
-         nextVertex.setPredecessor(null);
-      }
-   }
-
    /**
     * Dijkstra's algorithm minimising total travel time (edge weight = seconds).
     *
-    * @return the destination vertex with cost/predecessor populated, or null if
-    *         no path exists.
+    * @return the path from start to end, or null if none exists.
     */
-   public VertexInterface<T> computeShortestPathByTime(T start, T end) {
-      if (!vertices.contains(start) || !vertices.contains(end)) {
-         throw new IllegalArgumentException("Invalid start or end vertex.");
-      }
-      resetVertices();
-      PriorityQueue<EntryPQ> pQueue = new PriorityQueue<>(Comparator.comparingDouble(EntryPQ::getCost));
-      VertexInterface<T> lastVertex = vertices.getValue(end);
-      pQueue.add(new EntryPQ(vertices.getValue(start), 0, null));
+   public Path<T> computeShortestPathByTime(T start, T end) {
+      requireVertices(start, end);
 
-      while (!pQueue.isEmpty()) {
-         EntryPQ entry = pQueue.poll();
-         VertexInterface<T> vertex = entry.getVertex();
+      Map<T, Double> dist = new HashMap<>();
+      Map<T, T> predecessor = new HashMap<>();
+      Set<T> settled = new HashSet<>();
+      PriorityQueue<Step<T>> queue = new PriorityQueue<>(Comparator.comparingDouble(s -> s.priority));
 
-         if (!vertex.isVisited()) {
-            vertex.visit();
-            vertex.setCost(entry.getCost());
-            vertex.setPredecessor(entry.getPredecessor());
+      dist.put(start, 0.0);
+      queue.add(new Step<>(start, 0.0));
 
-            if (vertex.equals(lastVertex)) {
-               return vertex;
-            }
+      while (!queue.isEmpty()) {
+         T current = queue.poll().label;
+         if (!settled.add(current)) {
+            continue; // already finalised via a cheaper entry
+         }
+         if (current.equals(end)) {
+            return buildPath(predecessor, end, dist.get(end));
+         }
 
-            Iterator<VertexInterface<T>> neighbors = vertex.getNeighborIterator();
-            Iterator<Double> weights = vertex.getWeightIterator();
-            while (neighbors.hasNext()) {
-               VertexInterface<T> nextNeighbor = neighbors.next();
-               double newCost = vertex.getCost() + weights.next();
-               if (!nextNeighbor.isVisited()) {
-                  pQueue.add(new EntryPQ(nextNeighbor, newCost, vertex));
-               }
+         double currentDist = dist.get(current);
+         VertexInterface<T> vertex = vertices.getValue(current);
+         Iterator<VertexInterface<T>> neighbors = vertex.getNeighborIterator();
+         Iterator<Double> weights = vertex.getWeightIterator();
+         while (neighbors.hasNext()) {
+            T next = neighbors.next().getLabel();
+            double candidate = currentDist + weights.next();
+            if (candidate < dist.getOrDefault(next, Double.POSITIVE_INFINITY)) {
+               dist.put(next, candidate);
+               predecessor.put(next, current);
+               queue.add(new Step<>(next, candidate));
             }
          }
       }
@@ -112,46 +113,63 @@ public class DirectedGraph<T> {
    }
 
    /**
-    * Shortest path minimising the number of stops (each edge counts as one hop),
-    * keeping the travel-time cost along that path for reporting.
+    * Shortest path minimising the number of stops (each edge is one hop), while
+    * still accumulating the travel-time cost along that path for reporting.
     *
-    * @return the destination vertex with cost/predecessor populated, or null if
-    *         no path exists.
+    * @return the path from start to end, or null if none exists.
     */
-   public VertexInterface<T> computeShortestPathByStops(T start, T end) {
-      if (!vertices.contains(start) || !vertices.contains(end)) {
-         throw new IllegalArgumentException("Invalid start or end vertex.");
-      }
-      resetVertices();
-      PriorityQueue<EntryPQ> pQueue = new PriorityQueue<>(Comparator.comparingInt(EntryPQ::getStopCount));
-      VertexInterface<T> endVertex = vertices.getValue(end);
-      pQueue.add(new EntryPQ(vertices.getValue(start), 0, null, 0));
+   public Path<T> computeShortestPathByStops(T start, T end) {
+      requireVertices(start, end);
 
-      while (!pQueue.isEmpty()) {
-         EntryPQ entry = pQueue.poll();
-         VertexInterface<T> vertex = entry.getVertex();
+      Map<T, Integer> hops = new HashMap<>();
+      Map<T, Double> cost = new HashMap<>();
+      Map<T, T> predecessor = new HashMap<>();
+      Set<T> settled = new HashSet<>();
+      PriorityQueue<Step<T>> queue = new PriorityQueue<>(Comparator.comparingDouble(s -> s.priority));
 
-         if (!vertex.isVisited()) {
-            vertex.visit();
-            vertex.setCost(entry.getCost());
-            vertex.setPredecessor(entry.getPredecessor());
+      hops.put(start, 0);
+      cost.put(start, 0.0);
+      queue.add(new Step<>(start, 0));
 
-            if (vertex.equals(endVertex)) {
-               return vertex;
-            }
+      while (!queue.isEmpty()) {
+         T current = queue.poll().label;
+         if (!settled.add(current)) {
+            continue;
+         }
+         if (current.equals(end)) {
+            return buildPath(predecessor, end, cost.get(end));
+         }
 
-            Iterator<VertexInterface<T>> neighbors = vertex.getNeighborIterator();
-            Iterator<Double> weights = vertex.getWeightIterator();
-            while (neighbors.hasNext()) {
-               VertexInterface<T> nextNeighbor = neighbors.next();
-               double newCost = vertex.getCost() + weights.next();
-               if (!nextNeighbor.isVisited()) {
-                  pQueue.add(new EntryPQ(nextNeighbor, newCost, vertex, entry.getStopCount() + 1));
-               }
+         int nextHops = hops.get(current) + 1;
+         VertexInterface<T> vertex = vertices.getValue(current);
+         Iterator<VertexInterface<T>> neighbors = vertex.getNeighborIterator();
+         Iterator<Double> weights = vertex.getWeightIterator();
+         while (neighbors.hasNext()) {
+            T next = neighbors.next().getLabel();
+            double weight = weights.next();
+            if (nextHops < hops.getOrDefault(next, Integer.MAX_VALUE)) {
+               hops.put(next, nextHops);
+               cost.put(next, cost.get(current) + weight);
+               predecessor.put(next, current);
+               queue.add(new Step<>(next, nextHops));
             }
          }
       }
       return null;
+   }
+
+   private void requireVertices(T start, T end) {
+      if (!vertices.contains(start) || !vertices.contains(end)) {
+         throw new IllegalArgumentException("Invalid start or end vertex.");
+      }
+   }
+
+   private Path<T> buildPath(Map<T, T> predecessor, T end, double totalSeconds) {
+      LinkedList<T> stops = new LinkedList<>();
+      for (T at = end; at != null; at = predecessor.get(at)) {
+         stops.addFirst(at);
+      }
+      return new Path<>(stops, totalSeconds);
    }
 
    public int getNumberOfVertices() {
@@ -179,37 +197,14 @@ public class DirectedGraph<T> {
       return edgeCount;
    }
 
-   private class EntryPQ {
-      private final VertexInterface<T> vertex;
-      private final VertexInterface<T> previousVertex;
-      private final double cost;
-      private final int stopCount;
+   /** A priority-queue entry: a vertex label ranked by cost or hop count. */
+   private static final class Step<L> {
+      private final L label;
+      private final double priority;
 
-      private EntryPQ(VertexInterface<T> vertex, double cost, VertexInterface<T> previousVertex) {
-         this(vertex, cost, previousVertex, 0);
-      }
-
-      private EntryPQ(VertexInterface<T> vertex, double cost, VertexInterface<T> previousVertex, int stopCount) {
-         this.vertex = vertex;
-         this.previousVertex = previousVertex;
-         this.cost = cost;
-         this.stopCount = stopCount;
-      }
-
-      private int getStopCount() {
-         return stopCount;
-      }
-
-      private VertexInterface<T> getVertex() {
-         return vertex;
-      }
-
-      private VertexInterface<T> getPredecessor() {
-         return previousVertex;
-      }
-
-      private double getCost() {
-         return cost;
+      private Step(L label, double priority) {
+         this.label = label;
+         this.priority = priority;
       }
    }
 }
