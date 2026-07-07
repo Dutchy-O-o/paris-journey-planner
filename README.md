@@ -36,17 +36,18 @@ a Spring Boot REST API and a React + Leaflet map UI.
 
 ## Architecture
 
-```
-            HTTP/JSON                      in-process
- React UI ───────────────▶ Spring Boot ───────────────▶ DirectedGraph<Station>
- (Leaflet map)             RouteController              (custom Dictionary ADT)
-                           RouteService  ◀── GraphLoader reads CSV + coordinates
+```mermaid
+flowchart LR
+    UI["React UI<br/>Leaflet map"] -- "HTTP / JSON" --> API["Spring Boot<br/>RouteController → RouteService"]
+    API -- "in-process call" --> GRAPH["DirectedGraph&lt;Station&gt;<br/>custom Dictionary ADT"]
+    LOADER["GraphLoader"] -- "CSV + coordinates<br/>(at startup)" --> GRAPH
 ```
 
-The graph core knows nothing about HTTP or how a route is displayed: the algorithms
-record `cost` and `predecessor` links on the vertices and return the destination vertex.
-`RouteService` walks that predecessor chain and groups consecutive stations sharing a
-line into per-line segments — the shape the UI draws and lists.
+The graph core knows nothing about HTTP or how a route is displayed. Each search keeps
+its state in local maps (distance / predecessor / settled) rather than mutating the
+shared graph, so the singleton instance answers concurrent requests safely and returns
+an immutable `Path`. `RouteService` groups the returned stops into per-line segments —
+the shape the UI draws and lists.
 
 ## Running it
 
